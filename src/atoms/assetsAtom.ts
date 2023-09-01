@@ -14,7 +14,9 @@ export const selectedAssetAtom = selector<Asset | undefined>({
     const selectedAssetKey = get(selectedAssetKeyAtom);
 
     const selectedAsset: Asset | undefined = selectedLayer
-      ? selectedLayer.assets.find((asset) => asset.name === selectedAssetKey)
+      ? selectedLayer.assets.find(
+          (asset: Asset) => asset.name === selectedAssetKey
+        )
       : undefined;
 
     return selectedAsset;

@@ -1,7 +1,17 @@
-import { Container, SimpleGrid, Stack, createStyles } from "@mantine/core";
+import {
+  Button,
+  Container,
+  LoadingOverlay,
+  SimpleGrid,
+  Stack,
+  createStyles,
+} from "@mantine/core";
 import { LayersPanel } from "../LayersPanel";
 import { SettingsPanel } from "../SettingsPanel";
 import { Artwork } from "../Artwork/Artwork";
+import { useGenerateAssets } from "../../hooks";
+import { useRecoilValue } from "recoil";
+import { layersAtom } from "../../atoms";
 
 const useStyles = createStyles((theme) => ({
   grid: {
@@ -16,6 +26,8 @@ const useStyles = createStyles((theme) => ({
 
 export const Main = () => {
   const { classes } = useStyles();
+  const layers = useRecoilValue(layersAtom);
+  const { generateAssets, loading } = useGenerateAssets();
 
   return (
     <Container fluid={true}>
@@ -25,6 +37,14 @@ export const Main = () => {
         </Stack>
         <Stack className={classes.gridColumn}>
           <Artwork />
+          <Button
+            onClick={() => {
+              generateAssets(layers, 5);
+            }}
+          >
+            <LoadingOverlay visible={loading} overlayBlur={2} />
+            Generate
+          </Button>
         </Stack>
         <Stack className={classes.gridColumn}>
           <SettingsPanel />

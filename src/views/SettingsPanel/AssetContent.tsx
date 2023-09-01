@@ -17,10 +17,7 @@ import { faCircleCheck, faX } from "@fortawesome/pro-regular-svg-icons";
 import { Layer } from "../../types";
 
 const useStyles = createStyles((theme) => ({
-  wrapper: {
-    height: "100%",
-    position: "relative",
-  },
+  wrapper: {},
   image: {
     height: "auth",
     width: "100%",
@@ -103,7 +100,7 @@ export const AssetContent = () => {
         console.log(error);
         notifications.show({
           title: "Error",
-          message: "An error occurred while saving your asset.",
+          message: "An error occurred while saving your Asset.",
           color: "red",
           icon: <FontAwesomeIcon icon={faX} />,
         });

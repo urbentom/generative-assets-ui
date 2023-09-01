@@ -36,12 +36,12 @@ export const LayersPanel = () => {
     return layers.map((layer, index) => ({
       key: `${layer.name}-${index}`,
       label: layer.name,
-      open: selectedLayer.name === layer.name,
+      open: selectedLayer?.name === layer.name,
       files: layer.assets.map((asset) => ({
         label: asset.name,
         active:
           selectedAsset?.name === asset.name &&
-          selectedLayer.name === layer.name,
+          selectedLayer?.name === layer.name,
       })),
     }));
   }, [layers, selectedLayer, selectedAsset]);
@@ -53,10 +53,10 @@ export const LayersPanel = () => {
           <Directory
             {...layer}
             onFileClick={(value) => {
-              setAsset(value);
+              setAsset(value !== selectedAsset?.name ? value : undefined);
             }}
             onFolderClick={(value) => {
-              setLayer(value);
+              setLayer(value !== selectedLayer?.name ? value : undefined);
               setAsset(undefined);
             }}
           />

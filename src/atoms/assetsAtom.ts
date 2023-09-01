@@ -13,7 +13,7 @@ export const selectedAssetAtom = selector<Asset | undefined>({
     const selectedLayer = get(selectedLayerAtom);
     const selectedAssetKey = get(selectedAssetKeyAtom);
 
-    const selectedAsset = selectedLayer.assets.find(
+    const selectedAsset = selectedLayer?.assets.find(
       (asset) => asset.name === selectedAssetKey
     );
 

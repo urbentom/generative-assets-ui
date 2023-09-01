@@ -6,17 +6,17 @@ export const layersAtom = atom<Layer[]>({
   default: [],
 });
 
-export const selectedLayerKeyAtom = atom<string>({
+export const selectedLayerKeyAtom = atom<string | undefined>({
   key: "selectedLayerKeyAtom",
   default: "",
 });
 
-export const selectedLayerAtom = selector<Layer>({
+export const selectedLayerAtom = selector<Layer | undefined>({
   key: "selectedLayer",
   get: ({ get }) => {
     const layers = get(layersAtom);
     const selectedLayerKey = get(selectedLayerKeyAtom);
 
-    return layers.find((layer) => layer.name === selectedLayerKey) || layers[0];
+    return layers.find((layer) => layer.name === selectedLayerKey);
   },
 });

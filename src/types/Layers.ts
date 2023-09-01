@@ -1,4 +1,4 @@
-import { Asset } from "./Assets";
+import { Asset } from "./assets";
 
 export type Layer = {
   name: string;

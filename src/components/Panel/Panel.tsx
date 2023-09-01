@@ -25,7 +25,7 @@ export const Panel: React.FC<PanelProps> = ({ children, title }) => {
       <Title order={3} className={cx(classes["panelTitle"])}>
         {title}
       </Title>
-      <Box>{children}</Box>
+      {children}
     </Box>
   );
 };

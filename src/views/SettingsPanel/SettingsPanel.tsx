@@ -1,5 +1,4 @@
 import { Box, Text, Title, createStyles } from "@mantine/core";
-
 import { Panel } from "../../components/Panel";
 import { useRecoilValue } from "recoil";
 import { currentSettingsAtom } from "../../atoms";

@@ -7,9 +7,9 @@ export const SettingsContent = () => {
   const currentSettings = useRecoilValue(currentSettingsAtom);
 
   if (currentSettings?.type === "layer") {
-    return <LayerContent />;
+    return <LayerContent key={currentSettings.name} />;
   } else if (currentSettings?.type === "asset") {
-    return <AssetContent />;
+    return <AssetContent key={currentSettings.name} />;
   }
 
   return null;

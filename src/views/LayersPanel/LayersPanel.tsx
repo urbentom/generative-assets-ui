@@ -3,9 +3,10 @@ import { Directory } from "../../components/Directory";
 import { useMemo, useState } from "react";
 import { Panel } from "../../components/Panel";
 import { FileDrop } from "../../components/FileDrop";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   layersAtom,
+  layersCountAtom,
   selectedAssetAtom,
   selectedAssetKeyAtom,
   selectedLayerAtom,
@@ -26,7 +27,8 @@ const useStyles = createStyles((theme) => ({
 export const LayersPanel = () => {
   const { classes, cx } = useStyles();
 
-  const layers = useRecoilValue(layersAtom);
+  const [layers, setLayers] = useRecoilState(layersAtom);
+  const layersCount = useRecoilValue(layersCountAtom);
   const selectedLayer = useRecoilValue(selectedLayerAtom);
   const selectedAsset = useRecoilValue(selectedAssetAtom);
   const setAsset = useSetRecoilState(selectedAssetKeyAtom);
@@ -39,12 +41,31 @@ export const LayersPanel = () => {
       open: selectedLayer?.name === layer.name,
       files: layer.assets.map((asset) => ({
         label: asset.name,
+        file: asset.file,
         active:
           selectedAsset?.name === asset.name &&
           selectedLayer?.name === layer.name,
       })),
     }));
   }, [layers, selectedLayer, selectedAsset]);
+
+  const onFileDrop = (files: File[]) => {
+    const layerName = `Layer ${layersCount + 1}`;
+
+    setLayers([
+      ...layers,
+      {
+        name: layerName,
+        index: layersCount + 1,
+        previewImage: files[0],
+        assets: files.map((file) => ({
+          name: file.name,
+          weighting: 1,
+          file,
+        })),
+      },
+    ]);
+  };
 
   return (
     <Panel title="Layers">
@@ -62,7 +83,7 @@ export const LayersPanel = () => {
           />
         ))}
 
-        <FileDrop onDrop={() => {}} />
+        <FileDrop onDrop={onFileDrop} />
       </Stack>
     </Panel>
   );

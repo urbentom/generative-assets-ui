@@ -3,19 +3,13 @@ import {
   Button,
   NumberInput,
   Stack,
-  Text,
   TextInput,
   createStyles,
 } from "@mantine/core";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { faCircleCheck, faX } from "@fortawesome/pro-regular-svg-icons";
 import { notifications } from "@mantine/notifications";
-
-import {
-  currentSettingsAtom,
-  layersAtom,
-  selectedLayerAtom,
-} from "../../atoms";
+import { layersAtom, selectedLayerAtom } from "../../atoms";
 import { useForm } from "@mantine/form";
 import { Layer } from "../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

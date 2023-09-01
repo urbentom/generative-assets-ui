@@ -62,6 +62,7 @@ export const LayersPanel = () => {
           name: file.name,
           weighting: 100 / files.length,
           file,
+          traits: [],
         })),
       },
     ]);

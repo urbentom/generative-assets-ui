@@ -8,20 +8,25 @@ export type FolderCardProps = {
   open?: boolean;
 };
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    width: "100%",
-    borderRadius: theme.radius.md,
-    cursor: "pointer",
-  },
-}));
+
+
+const useStyles = createStyles(
+  (theme, { open }: Pick<FolderCardProps, "open">) => ({
+    card: {
+      width: "100%",
+      borderRadius: theme.radius.md,
+      cursor: "pointer",
+      backgroundColor: open ? theme.colors.dark[4] : undefined,
+    },
+  })
+);
 
 export const FolderCard: React.FC<FolderCardProps> = ({
   label,
   open,
   onClick,
 }) => {
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles({ open });
 
   return (
     <Card

@@ -8,13 +8,16 @@ export type FileCardProps = {
   active?: boolean;
 };
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    width: "100%",
-    cursor: "pointer",
-    padding: theme.spacing.xs,
-  },
-}));
+const useStyles = createStyles(
+  (theme, { active }: Pick<FileCardProps, "active">) => ({
+    card: {
+      width: "100%",
+      cursor: "pointer",
+      padding: theme.spacing.xs,
+      backgroundColor: active ? theme.colors.dark[4] : undefined,
+    },
+  })
+);
 
 export const FileCard: React.FC<FileCardProps> = ({
   label,
@@ -22,7 +25,7 @@ export const FileCard: React.FC<FileCardProps> = ({
   onClick,
 }) => {
   "use client";
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles({ active });
 
   return (
     <Card

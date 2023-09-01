@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const Main = () => {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const setLayers = useSetRecoilState(layersAtom);
 
   setLayers([
@@ -41,29 +41,51 @@ export const Main = () => {
       ],
     },
     {
-      name: "Layer 2",
+      name: "Body",
       index: 2,
       previewImage: undefined,
-      assets: [],
+      assets: [
+        {
+          name: "Blue Stripped Top",
+          weighting: 1,
+          file: new File([], "blue-hat.png"),
+        },
+        {
+          name: "Green Top",
+          weighting: 1,
+          file: new File([], "blue-hat.png"),
+        },
+      ],
     },
     {
-      name: "Layer 3",
+      name: "Background",
       index: 3,
       previewImage: undefined,
-      assets: [],
+      assets: [
+        {
+          name: "Stary Night",
+          weighting: 1,
+          file: new File([], "blue-hat.png"),
+        },
+        {
+          name: "Foggy Background",
+          weighting: 1,
+          file: new File([], "blue-hat.png"),
+        },
+      ],
     },
   ]);
 
   return (
     <Container fluid={true}>
-      <SimpleGrid cols={3} className={cx(classes["grid"])}>
-        <Stack className={cx(classes["gridColumn"])}>
+      <SimpleGrid cols={3} className={classes.grid}>
+        <Stack className={classes.gridColumn}>
           <LayersPanel />
         </Stack>
-        <Stack className={cx(classes["gridColumn"])}>
+        <Stack className={classes.gridColumn}>
           <Artwork />
         </Stack>
-        <Stack className={cx(classes["gridColumn"])}>
+        <Stack className={classes.gridColumn}>
           <SettingsPanel />
         </Stack>
       </SimpleGrid>

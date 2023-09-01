@@ -1,17 +1,13 @@
 import {
   Box,
   Button,
+  NumberInput,
   Stack,
-  Text,
   TextInput,
   createStyles,
 } from "@mantine/core";
 import { useRecoilValue } from "recoil";
-import {
-  currentSettingsAtom,
-  selectedAssetAtom,
-  selectedLayerAtom,
-} from "../../atoms";
+import { selectedAssetAtom, selectedLayerAtom } from "../../atoms";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,7 +29,6 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const AssetContent = () => {
-  const currentSettings = useRecoilValue(currentSettingsAtom);
   const selectedAsset = useRecoilValue(selectedAssetAtom);
   const selectedLayer = useRecoilValue(selectedLayerAtom);
   const { classes } = useStyles();
@@ -41,6 +36,7 @@ export const AssetContent = () => {
   const form = useForm({
     initialValues: {
       name: selectedAsset?.name,
+      weighting: selectedAsset?.weighting,
     },
 
     validate: {
@@ -80,6 +76,10 @@ export const AssetContent = () => {
             label={"Name"}
             withAsterisk
             {...form.getInputProps("name")}
+          />
+          <NumberInput
+            label={"Weighting"}
+            {...form.getInputProps("weighting")}
           />
         </Stack>
         <Button onClick={onSubmit} disabled={!form.isDirty()}>

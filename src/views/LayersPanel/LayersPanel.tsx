@@ -60,7 +60,7 @@ export const LayersPanel = () => {
         previewImage: files[0],
         assets: files.map((file) => ({
           name: file.name,
-          weighting: 1,
+          weighting: 100 / files.length,
           file,
         })),
       },
